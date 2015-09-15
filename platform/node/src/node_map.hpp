@@ -43,8 +43,8 @@ public:
     NodeMap(v8::Local<v8::Object>);
     ~NodeMap();
 
-    mbgl::HeadlessView view;
-    NodeFileSource fs;
+    std::unique_ptr<mbgl::HeadlessView> view;
+    std::unique_ptr<NodeFileSource> fs;
     std::unique_ptr<mbgl::Map> map;
 
     std::exception_ptr error;
