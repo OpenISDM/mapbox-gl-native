@@ -109,6 +109,7 @@
           '<@(geojsonvt_cflags)',
           '<@(variant_cflags)',
           '<@(rapidjson_cflags)',
+          '<@(earcut_cflags)',
         ],
         'ldflags': [
           '<@(gtest_ldflags)',
