@@ -15,7 +15,7 @@ GEOJSONVT_VERSION=2.1.6.3
 VARIANT_VERSION=1.0
 RAPIDJSON_VERSION=1.0.2
 GTEST_VERSION=1.7.0
-EARCUT_VERSION=0.10.2
+EARCUT_VERSION=0.10.3
 
 function print_opengl_flags {
     CONFIG+="    'opengl_cflags%': $(quote_flags $(pkg-config gl x11 --cflags)),"$LN
