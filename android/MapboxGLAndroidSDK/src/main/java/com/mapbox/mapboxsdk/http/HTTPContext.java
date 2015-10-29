@@ -1,5 +1,7 @@
 package com.mapbox.mapboxsdk.http;
 
+import android.util.Log;
+
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
@@ -44,6 +46,8 @@ class HTTPContext {
     }
 
     public class HTTPRequest implements Callback {
+        private final String LOG_TAG = HTTPRequest.class.getName();
+
         private long mNativePtr = 0;
 
         private Call mCall;
@@ -74,6 +78,8 @@ class HTTPContext {
 
         @Override
         public void onFailure(Request request, IOException e) {
+            Log.d(LOG_TAG, "onFailure: " + e.getMessage());
+
             int type = PERMANENT_ERROR;
             if ((e instanceof UnknownHostException) || (e instanceof SocketException) || (e instanceof ProtocolException) || (e instanceof SSLException)) {
                 type = CONNECTION_ERROR;
@@ -92,12 +98,12 @@ class HTTPContext {
             try {
                 body = response.body().bytes();
             } catch (IOException e) {
-                onFailure(mRequest, e);
-                return;
+                onFailure(null, e);
+                throw e;
             } finally {
                 response.body().close();
             }
-
+            
             nativeOnResponse(mNativePtr, response.code(), response.message(), response.header("ETag"), response.header("Last-Modified"), response.header("Cache-Control"), response.header("Expires"), body);
         }
     }
