@@ -18,7 +18,10 @@ namespace mbgl {
 
 class CollisionTile;
 class GeometryTile;
-class Style;
+class SpriteAtlas;
+class SpriteStore;
+class GlyphAtlas;
+class GlyphStore;
 class Bucket;
 class StyleLayer;
 
@@ -37,7 +40,10 @@ class TileWorker : public util::noncopyable {
 public:
     TileWorker(TileID,
                std::string sourceID,
-               Style&,
+               SpriteAtlas&,
+               SpriteStore&,
+               GlyphAtlas&,
+               GlyphStore&,
                const std::atomic<TileData::State>&);
     ~TileWorker();
 
@@ -58,7 +64,10 @@ private:
     const TileID id;
     const std::string sourceID;
 
-    Style& style;
+    SpriteAtlas& spriteAtlas;
+    SpriteStore& spriteStore;
+    GlyphAtlas& glyphAtlas;
+    GlyphStore& glyphStore;
     const std::atomic<TileData::State>& state;
 
     bool partialParse = false;
