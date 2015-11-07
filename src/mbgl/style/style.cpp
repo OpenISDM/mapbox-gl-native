@@ -33,7 +33,6 @@ Style::Style(MapData& data_)
       spriteStore(std::make_unique<SpriteStore>(data.pixelRatio)),
       spriteAtlas(std::make_unique<SpriteAtlas>(512, 512, data.pixelRatio, *spriteStore)),
       lineAtlas(std::make_unique<LineAtlas>(512, 512)),
-      mtx(std::make_unique<uv::rwlock>()),
       workers(4) {
     glyphStore->setObserver(this);
     spriteStore->setObserver(this);
@@ -149,8 +148,6 @@ void Style::cascade() {
 }
 
 void Style::recalculate(float z) {
-    uv::writelock lock(mtx);
-
     for (const auto& source : sources) {
         source->enabled = false;
     }

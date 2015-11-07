@@ -133,7 +133,6 @@ private:
 
     std::exception_ptr lastError;
 
-    std::unique_ptr<uv::rwlock> mtx;
     ZoomHistory zoomHistory;
     bool hasPendingTransitions = false;
 
