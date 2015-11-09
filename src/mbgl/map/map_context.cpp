@@ -40,6 +40,15 @@ MapContext::MapContext(View& view_, FileSource& fileSource, MapData& data_)
     asyncUpdate.unref();
     asyncInvalidate.unref();
 
+    // Throttle ::update() to 16ms for 60 FPS. The idea here is
+    // it is useless to try to update the map state more than
+    // 60 times a second because the user will never see the
+    // changes. Increasing the throttle value might increase
+    // performance at slow systems at the cost of rendering
+    // old tiles, labels colliding or upside down when
+    // rotated until the next ::update().
+    asyncUpdate.setThrottle(16);
+
     view.activate();
 }
 
@@ -84,6 +93,10 @@ void MapContext::triggerUpdate(const TransformState& state, const Update flags) 
     updateFlags |= flags;
 
     asyncUpdate.send();
+
+    if (data.mode == MapMode::Continuous) {
+        asyncInvalidate.send();
+    }
 }
 
 void MapContext::setStyleURL(const std::string& url) {
