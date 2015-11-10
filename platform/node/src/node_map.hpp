@@ -29,7 +29,7 @@ public:
     static NAN_METHOD(Release);
     static NAN_METHOD(DumpDebugLogs);
 
-    void startRender(std::unique_ptr<NodeMap::RenderOptions> options);
+    void startRender(std::unique_ptr<NodeMap::RenderOptions>);
     void renderFinished();
 
     void release();
@@ -44,7 +44,7 @@ public:
     ~NodeMap();
 
     std::unique_ptr<mbgl::HeadlessView> view;
-    std::unique_ptr<NodeFileSource> fs;
+    std::unique_ptr<mbgl::NodeFileSource> fs;
     std::unique_ptr<mbgl::Map> map;
 
     std::exception_ptr error;

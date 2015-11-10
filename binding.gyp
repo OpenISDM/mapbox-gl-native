@@ -11,6 +11,8 @@
       ],
 
       'include_dirs': [
+        'include',
+        'src',
         '<(node_root_dir)/include/node',
         "<!(node -e \"require('nan')\")",
       ],
@@ -20,11 +22,10 @@
         'platform/node/src/node_log.hpp',
         'platform/node/src/node_log.cpp',
         'platform/node/src/node_file_source.hpp',
+        'platform/node/src/node_file_source_impl.hpp',
         'platform/node/src/node_file_source.cpp',
         'platform/node/src/node_map.hpp',
         'platform/node/src/node_map.cpp',
-        'platform/node/src/node_request.hpp',
-        'platform/node/src/node_request.cpp',
         'platform/node/src/util/async_queue.hpp',
       ],
     },

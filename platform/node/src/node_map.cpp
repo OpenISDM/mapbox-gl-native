@@ -430,7 +430,7 @@ NodeMap::NodeMap(v8::Local<v8::Object> options) :
         Nan::HandleScope scope;
         return Nan::Has(options, Nan::New("ratio").ToLocalChecked()).FromJust() ? Nan::Get(options, Nan::New("ratio").ToLocalChecked()).ToLocalChecked()->NumberValue() : 1.0;
     }())),
-    fs(std::make_unique<NodeFileSource>(options)),
+    fs(std::make_unique<mbgl::NodeFileSource>(options)),
     map(std::make_unique<mbgl::Map>(*view, *fs, mbgl::MapMode::Still)),
     async(new uv_async_t) {
 

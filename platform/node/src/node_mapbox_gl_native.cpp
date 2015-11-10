@@ -8,11 +8,11 @@
 
 #include "node_map.hpp"
 #include "node_log.hpp"
-#include "node_request.hpp"
+#include "node_file_source_impl.hpp"
 
 NAN_MODULE_INIT(RegisterModule) {
     node_mbgl::NodeMap::Init(target);
-    node_mbgl::NodeRequest::Init(target);
+    mbgl::NodeFileRequest::Init(target);
 
     // Exports Resource constants.
     v8::Local<v8::Object> resource = Nan::New<v8::Object>();
