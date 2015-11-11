@@ -158,7 +158,7 @@ public final class MapView extends FrameLayout {
      *
      * @see MapView#setZoomLevel(double)
      */
-    public static final double MAXIMUM_ZOOM_LEVEL = 18.0;
+    public static final double MAXIMUM_ZOOM_LEVEL = 22.0;
 
     //
     // Instance members
